@@ -1,0 +1,152 @@
+Run started:2025-04-16 21:04:52.090199
+
+Test results:
+>> Issue: [B506:yaml_load] Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().
+   Severity: Medium   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b506_yaml_load.html
+   Location: .\misc\config.py:99:25
+98	    with open(filename, 'r') as f:
+99	        yaml_cfg = edict(yaml.load(f))
+100	
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b101_assert_used.html
+   Location: .\misc\custom_ops.py:68:4
+67	def leaky_rectify(x, leakiness=0.01):
+68	    assert leakiness <= 1
+69	    ret = tf.maximum(x, leakiness * x)
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: .\misc\datasets.py:6:0
+5	import numpy as np
+6	import pickle
+7	import random
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b311-random
+   Location: .\misc\datasets.py:79:19
+78	                    images[i][w1: w1 + self._imsize, h1: h1 + self._imsize, :]
+79	                if random.random() > 0.5:
+80	                    transformed_images[i] = np.fliplr(cropped_image)
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b101_assert_used.html
+   Location: .\misc\datasets.py:126:12
+125	            self._index_in_epoch = batch_size
+126	            assert batch_size <= self._num_examples
+127	        end = self._index_in_epoch
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\datasets.py:224:21
+223	        with open(pickle_path + self.image_filename, 'rb') as f:
+224	            images = pickle.load(f)
+225	            images = np.array(images)
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\datasets.py:229:25
+228	        with open(pickle_path + self.embedding_filename, 'rb') as f:
+229	            embeddings = pickle.load(f)
+230	            embeddings = np.array(embeddings)
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\datasets.py:234:29
+233	        with open(pickle_path + '/filenames.pickle', 'rb') as f:
+234	            list_filenames = pickle.load(f)
+235	            print('list_filenames: ', len(list_filenames), list_filenames[0])
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\datasets.py:237:23
+236	        with open(pickle_path + '/class_info.pickle', 'rb') as f:
+237	            class_id = pickle.load(f)
+238	
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: .\misc\preprocess_birds.py:9:0
+8	import os
+9	import pickle
+10	from misc.utils import get_image
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\preprocess_birds.py:28:20
+27	    with open(filepath, 'rb') as f:
+28	        filenames = pickle.load(f)
+29	    print('Load filenames from: %s (%d)' % (filepath, len(filenames)))
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: .\misc\preprocess_flowers.py:9:0
+8	import os
+9	import pickle
+10	from misc.utils import get_image
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle
+   Location: .\misc\preprocess_flowers.py:27:20
+26	    with open(filepath, 'rb') as f:
+27	        filenames = pickle.load(f)
+28	    print('Load filenames from: %s (%d)' % (filepath, len(filenames)))
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 2717
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 6
+		Medium: 7
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 13
+Files skipped (1):
+	.\misc\skipthoughts.py (syntax error while parsing AST from file)
